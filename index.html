@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#fff7fb">
+<title>♡ Word Closet ♡</title>
+<style>
+:root{--pink:#e98bb7;--pink2:#f8d9e8;--pale:#fff5fa;--ink:#514750;--gray:#a69ba4;--line:#f0e2ea;--white:#fff;--shadow:0 8px 24px #d9a9c51c}
+*{box-sizing:border-box}body{margin:0;background:linear-gradient(145deg,#fff 0%,#fff7fb 58%,#f9f1f7 100%);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"Hiragino Kaku Gothic ProN","Noto Sans JP",sans-serif;min-height:100vh}
+button,input,select,textarea{font:inherit}button{cursor:pointer;border:0} .app{max-width:760px;margin:auto;min-height:100vh;padding:0 16px 100px}
+header{padding:24px 4px 14px;display:flex;align-items:center;justify-content:space-between}
+.brand{font-family:Georgia,serif;font-size:25px;font-weight:bold;color:#d978a6;letter-spacing:.3px}.brand small{display:block;font:10px sans-serif;letter-spacing:3px;color:#b8aab4;margin-top:3px}
+.header-actions{display:flex;gap:8px}.iconbtn{background:white;border:1px solid var(--line);color:#d978a6;border-radius:14px;width:39px;height:39px;font-size:18px;box-shadow:var(--shadow)}
+nav{display:flex;gap:8px;background:#fff;border:1px solid var(--line);border-radius:18px;padding:5px;box-shadow:var(--shadow);margin:4px 0 22px}
+nav button{flex:1;background:transparent;color:#a99ba5;padding:11px 5px;border-radius:13px;font-size:13px;font-weight:700}
+nav button.active{background:var(--pale);color:#d978a6;box-shadow:inset 0 0 0 1px #f4d4e4}
+.page{display:none}.page.active{display:block}.eyebrow{font-size:10px;letter-spacing:2px;color:#c28ca8;font-weight:800;margin:0 0 7px}
+h1{font-size:22px;margin:0 0 6px;color:#594d57}h2{font-size:17px;margin:0 0 13px}p.sub{font-size:12px;color:#a99ba5;margin:0 0 18px;line-height:1.7}
+.hero{background:linear-gradient(120deg,#fff 0%,#fff1f8 100%);border:1px solid #f3dce8;border-radius:23px;padding:20px;margin-bottom:17px;box-shadow:var(--shadow);position:relative;overflow:hidden}
+.hero:after{content:"♡";position:absolute;right:15px;top:4px;font:78px Georgia;color:#f6dce9;transform:rotate(13deg)}
+.hero strong{font:italic 19px Georgia;color:#d978a6}.hero p{font-size:12px;color:#a99ba5;margin:8px 0 0;max-width:75%;line-height:1.6}
+.row{display:flex;align-items:center;gap:9px}.between{justify-content:space-between}.muted{color:var(--gray);font-size:11px}
+.btn{padding:11px 15px;border-radius:13px;background:#e98bb7;color:#fff;font-weight:750;font-size:13px;box-shadow:0 4px 12px #e98bb733}
+.btn.soft{background:#fff0f7;color:#cf78a2;border:1px solid #f4d5e4;box-shadow:none}.btn.gray{background:#f4f0f3;color:#8e818b;box-shadow:none}.btn.small{padding:8px 11px;font-size:11px}
+.toolbar{display:flex;gap:8px;flex-wrap:wrap;margin:13px 0 17px}
+.breadcrumb{display:flex;gap:6px;align-items:center;flex-wrap:wrap;font-size:12px;color:#b18ba0;margin:13px 0}
+.crumb{background:#fff;border:1px solid var(--line);padding:6px 9px;border-radius:10px;color:#bd789a}
+.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:11px}
+.tile{background:#fff;border:1px solid var(--line);border-radius:19px;padding:12px;box-shadow:var(--shadow);min-width:0}
+.cover{height:104px;border-radius:13px;background:linear-gradient(135deg,#fff1f8,#f6eaf2);display:flex;align-items:center;justify-content:center;overflow:hidden;margin-bottom:10px;color:#dc8bb2;font-size:36px;position:relative}
+.cover img{width:100%;height:100%;object-fit:cover}.tile-title{font-size:14px;font-weight:800;overflow-wrap:anywhere}.tile-meta{font-size:10px;color:#aa9ca6;margin-top:4px}
+.hearts{display:flex;gap:2px;letter-spacing:0;color:#e8a2c2;font-size:13px;white-space:nowrap}.heart-empty{color:#eadde5}
+.progress{font-size:10px;color:#a99ba5;margin-top:5px}
+.empty{border:1px dashed #e8cad9;background:#fff9fc;border-radius:18px;padding:27px 15px;text-align:center;color:#b39eac;font-size:12px;line-height:1.8}
+.panel{background:#fff;border:1px solid var(--line);border-radius:20px;padding:16px;box-shadow:var(--shadow);margin-bottom:13px}
+label{display:block;font-size:11px;font-weight:800;color:#9c8493;margin:0 0 6px}
+input[type=text],textarea,select{width:100%;border:1px solid #efdee7;background:#fffafd;border-radius:12px;padding:12px;color:var(--ink);outline:none;font-size:14px}
+input:focus,textarea:focus,select:focus{border-color:#e9a4c4;box-shadow:0 0 0 3px #fceaf3}
+.field{margin-bottom:13px}.two{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.cardrow{border:1px solid var(--line);border-radius:14px;padding:11px;margin:9px 0;background:#fffafd}
+.cardrow .word{font-weight:800;font-size:14px}.cardrow .meaning{font-size:12px;color:#8d7d89;margin-top:4px}
+.pill{font-size:10px;border-radius:20px;padding:4px 8px;background:#f7eff3;color:#a78c9d}
+.pill.ok{background:#eaf7f0;color:#62a783}.pill.ng{background:#fff0f0;color:#d68c8c}
+.flashcard{min-height:260px;background:linear-gradient(145deg,#fff 0%,#fff2f8 100%);border:1px solid #f0d6e4;border-radius:25px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:25px;box-shadow:var(--shadow);margin:18px 0}
+.flashcard .side{font-size:10px;letter-spacing:2px;color:#c58eaa;margin-bottom:18px}.flashcard .mainword{font-size:clamp(25px,7vw,38px);font-weight:800;overflow-wrap:anywhere}.flashcard .tap{font-size:11px;color:#b6a6b1;margin-top:24px}
+.quiz-actions{display:grid;grid-template-columns:1fr 1fr;gap:10px}.quiz-actions button{padding:15px;border-radius:15px;font-weight:800;font-size:14px}.wrong{background:#fff0f0;color:#d47e86}.right{background:#eaf7f0;color:#63a77f}
+.notice{font-size:11px;line-height:1.7;color:#a99ba5;background:#fff8fb;border-radius:12px;padding:10px;margin-top:10px}
+.filelabel{display:inline-flex;align-items:center;gap:6px;background:#fff0f7;border:1px solid #f2d5e3;color:#c9779f;border-radius:12px;padding:9px 11px;font-size:11px;font-weight:700;cursor:pointer}
+.filelabel input{display:none}
+.bottom-note{text-align:center;color:#c4b4bf;font:italic 11px Georgia;margin:24px 0}
+.toast{position:fixed;bottom:25px;left:50%;transform:translateX(-50%);background:#594d57;color:white;padding:11px 16px;border-radius:20px;font-size:12px;opacity:0;pointer-events:none;transition:.2s;z-index:9}.toast.show{opacity:1}
+@media(min-width:600px){.grid{grid-template-columns:repeat(3,minmax(0,1fr))}.cover{height:120px}}
+</style>
+</head>
+<body>
+<div class="app">
+<header><div class="brand">♡ Word Closet ♡<small>MY LITTLE VOCABULARY</small></div><div class="header-actions"><button class="iconbtn" id="exportBtn" title="バックアップ">⇧</button><button class="iconbtn" id="importBtn" title="読み込み">⇩</button><input id="importFile" type="file" accept="application/json" hidden></div></header>
+<nav><button class="active" data-page="home">⌂ ホーム</button><button data-page="edit">✎ 編集</button><button data-page="quiz">♡ 暗記テスト</button></nav>
+
+<section id="home" class="page active">
+<div class="hero"><div class="eyebrow">WELCOME TO YOUR WORD CLOSET</div><strong>Little by little, you can do it ♡</strong><p>好きな参考書ごとに整理して、覚えた単語をハートでいっぱいにしよう。</p></div>
+<div class="row between"><div><div class="eyebrow">YOUR LIBRARY</div><h1 id="locationTitle">マイライブラリ</h1></div><span class="pill" id="itemCount">0 items</span></div>
+<div id="breadcrumbs" class="breadcrumb"></div>
+<div class="toolbar"><button class="btn" id="addFolder">＋ フォルダ</button><button class="btn soft" id="addDeck">＋ 単語帳</button><button class="btn gray" id="goRoot">⌂ ルート</button></div>
+<div id="libraryGrid" class="grid"></div>
+<div class="bottom-note">♡ make your own little word world ♡</div>
+</section>
+
+<section id="edit" class="page">
+<div class="eyebrow">EDIT YOUR VOCABULARY</div><h1>単語帳を編集</h1><p class="sub">英語・日本語どちらから入力してもOK。反対側の訳を自動で取得します。</p>
+<div class="panel">
+<div class="field"><label>編集する単語帳</label><select id="deckSelect"></select></div>
+<div class="two">
+<div class="field"><label>表の言語</label><select id="frontLang"><option value="en">英語</option><option value="ja">日本語</option></select></div>
+<div class="field"><label>裏の言語</label><select id="backLang"><option value="ja">日本語</option><option value="en">英語</option></select></div>
+</div>
+<div class="field"><label>表（単語・問題）</label><input type="text" id="frontInput" placeholder="例：abandon / あきらめる"></div>
+<div class="field"><label>裏（意味・答え）</label><input type="text" id="backInput" placeholder="自動翻訳または手入力"></div>
+<div class="row between"><span class="muted" id="translateStatus">入力すると自動翻訳します</span><button class="btn small soft" id="translateNow">↻ 翻訳する</button></div>
+<div class="notice">自動翻訳はオンライン接続が必要です。訳語は候補なので、熟語・文脈・参考書の訳に合わせて確認してね。</div>
+<div class="toolbar"><button class="btn" id="saveWord">＋ 単語を追加</button><button class="btn gray" id="clearWord">クリア</button></div>
+</div>
+<h2>登録済みの単語</h2><div id="wordList"></div>
+</section>
+
+<section id="quiz" class="page">
+<div class="eyebrow">LET'S MEMORIZE ♡</div><h1>暗記テスト</h1><p class="sub">カードをタップして裏返し、覚えていたら○・間違えたら×を押そう。</p>
+<div class="panel"><label>テストする単語帳</label><select id="quizDeckSelect"></select><div class="row between" style="margin-top:12px"><span class="muted" id="quizProgress">0 / 0</span><span class="muted" id="quizStatus">未回答</span></div></div>
+<div id="quizArea"></div>
+</section>
+</div>
+<div class="toast" id="toast"></div>
+<script>
+const STORE='wordCloset_v1';
+let db=load(), currentFolder=null, editingId=null, quizIndex=0, quizOrder=[], flipped=false, translateTimer=null;
+function load(){try{return JSON.parse(localStorage.getItem(STORE))||{items:[]}}catch(e){return{items:[]}}}
+function persist(){localStorage.setItem(STORE,JSON.stringify(db));}
+function id(){return 'i'+Date.now().toString(36)+Math.random().toString(36).slice(2,7)}
+function esc(s=''){return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
+function toast(s){let t=document.getElementById('toast');t.textContent=s;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),2100)}
+function children(parent){return db.items.filter(x=>(x.parent||null)===(parent||null))}
+function find(id){return db.items.find(x=>x.id===id)}
+function decks(){return db.items.filter(x=>x.type==='deck')}
+function allWords(deck){return deck?.words||[]}
+function mastery(deck){let w=allWords(deck);return w.length?Math.floor(w.filter(x=>x.known===true).length/w.length*100):0}
+function hearts(p){let n=Math.floor(p/10);return '<span class="hearts">'+Array.from({length:10},(_,i)=>`<span class="${i<n?'':'heart-empty'}">${i<n?'♥':'♡'}</span>`).join('')+'</span>'}
+function page(name){document.querySelectorAll('.page').forEach(x=>x.classList.toggle('active',x.id===name));document.querySelectorAll('nav button').forEach(x=>x.classList.toggle('active',x.dataset.page===name));if(name==='edit')refreshDeckSelect();if(name==='quiz')refreshQuizSelect()}
+document.querySelectorAll('nav button').forEach(b=>b.onclick=()=>page(b.dataset.page));
+function renderHome(){
+ let parent=find(currentFolder), list=children(currentFolder);
+ document.getElementById('locationTitle').textContent=parent?parent.name:'マイライブラリ';
+ document.getElementById('itemCount').textContent=list.length+' items';
+ let crumbs=[];let p=parent;while(p){crumbs.unshift(p);p=find(p.parent)}
+ document.getElementById('breadcrumbs').innerHTML=crumbs.map((c,i)=>`<button class="crumb" data-crumb="${c.id}">${esc(c.name)}</button>`).join('<span>›</span>');
+ document.querySelectorAll('[data-crumb]').forEach(b=>b.onclick=()=>{currentFolder=b.dataset.crumb;renderHome()});
+ let grid=document.getElementById('libraryGrid');
+ if(!list.length){grid.innerHTML='<div class="empty" style="grid-column:1/-1">ここはまだ空っぽ ♡<br>「フォルダ」か「単語帳」を作って始めよう！</div>';return}
+ grid.innerHTML=list.map(x=>{
+  if(x.type==='folder')return `<article class="tile"><div class="cover" data-open="${x.id}">${x.cover?`<img src="${x.cover}">`:'♡'}</div><div class="row between"><div class="tile-title">${esc(x.name)}</div><span class="pill">FOLDER</span></div><div class="tile-meta">${children(x.id).length} items</div><div class="toolbar"><button class="btn small soft" data-open="${x.id}">開く</button><button class="btn small gray" data-cover="${x.id}">表紙</button><button class="btn small gray" data-del="${x.id}">削除</button></div></article>`;
+  let pct=mastery(x),w=allWords(x);
+  return `<article class="tile"><div class="cover" data-deck="${x.id}">📖</div><div class="row between"><div class="tile-title">${esc(x.name)}</div><span class="pill">WORD BOOK</span></div><div class="tile-meta">${w.length} words · ${pct}%</div><div style="margin-top:8px">${hearts(pct)}</div><div class="toolbar"><button class="btn small" data-quiz="${x.id}">テスト</button><button class="btn small soft" data-edit="${x.id}">編集</button><button class="btn small gray" data-del="${x.id}">削除</button></div></article>`;
+ }).join('');
+ grid.querySelectorAll('[data-open]').forEach(b=>b.onclick=()=>{currentFolder=b.dataset.open;renderHome()});
+ grid.querySelectorAll('[data-quiz]').forEach(b=>b.onclick=()=>{document.getElementById('quizDeckSelect').value=b.dataset.quiz;startQuiz();page('quiz')});
+ grid.querySelectorAll('[data-edit]').forEach(b=>b.onclick=()=>{page('edit');document.getElementById('deckSelect').value=b.dataset.edit;renderWords()});
+ grid.querySelectorAll('[data-del]').forEach(b=>b.onclick=()=>deleteItem(b.dataset.del));
+ grid.querySelectorAll('[data-cover]').forEach(b=>b.onclick=()=>chooseCover(b.dataset.cover));
+}
+function addItem(type){
+ let level=0,p=find(currentFolder);while(p){level++;p=find(p.parent)}
+ if(type==='folder'&&level>=3){toast('フォルダは3階層までです');return}
+ if(type==='deck'&&level>3){toast('この場所には作成できません');return}
+ let name=prompt(type==='folder'?'フォルダ名を入力':'単語帳名を入力');if(!name?.trim())return;
+ db.items.push({id:id(),type,name:name.trim(),parent:currentFolder||null,...(type==='deck'?{words:[]}:{cover:null})});persist();renderHome();toast('作成しました ♡');
+}
+document.getElementById('addFolder').onclick=()=>addItem('folder');
+document.getElementById('addDeck').onclick=()=>addItem('deck');
+document.getElementById('goRoot').onclick=()=>{currentFolder=null;renderHome()};
+function deleteItem(key){let item=find(key);if(!item)return;if(!confirm(`「${item.name}」を削除しますか？中身も削除されます。`))return;let ids=[key];for(let i=0;i<ids.length;i++)children(ids[i]).forEach(x=>ids.push(x.id));db.items=db.items.filter(x=>!ids.includes(x.id));persist();renderHome();refreshDeckSelect();toast('削除しました')}
+function chooseCover(key){let inp=document.createElement('input');inp.type='file';inp.accept='image/*';inp.onchange=()=>{let f=inp.files[0];if(!f)return;if(f.size>2*1024*1024){toast('画像は2MB以下にしてください');return}let r=new FileReader();r.onload=()=>{find(key).cover=r.result;persist();renderHome()};r.readAsDataURL(f)};inp.click()}
+function deckLabel(d){let path=[],p=d;while(p){path.unshift(p.name);p=find(p.parent)}return path.join(' / ')}
+function refreshDeckSelect(){let ds=decks();['deckSelect','quizDeckSelect'].forEach(id0=>{let s=document.getElementById(id0),old=s.value;s.innerHTML=ds.map(d=>`<option value="${d.id}">${esc(deckLabel(d))}</option>`).join('')||'<option value="">単語帳がありません</option>';if(ds.some(d=>d.id===old))s.value=old});renderWords()}
+document.getElementById('deckSelect').onchange=renderWords;
+document.getElementById('frontLang').onchange=()=>{document.getElementById('backLang').value=document.getElementById('frontLang').value==='en'?'ja':'en';scheduleTranslate()};
+document.getElementById('backLang').onchange=()=>{if(document.getElementById('backLang').value===document.getElementById('frontLang').value)document.getElementById('frontLang').value=document.getElementById('backLang').value==='en'?'ja':'en';scheduleTranslate()};
+document.getElementById('frontInput').addEventListener('input',()=>{editingId=null;scheduleTranslate()});
+document.getElementById('backInput').addEventListener('input',()=>{editingId=null;scheduleTranslate()});
+async function translate(){
+ let a=document.getElementById('frontInput'),b=document.getElementById('backInput'),fl=document.getElementById('frontLang').value,bl=document.getElementById('backLang').value;
+ let source=a.value.trim()?a:b,target=a.value.trim()?b:a,srcLang=a.value.trim()?fl:bl,tgtLang=a.value.trim()?bl:fl;
+ if(!source.value.trim()||target.value.trim()||srcLang===tgtLang)return;
+ let status=document.getElementById('translateStatus');status.textContent='翻訳中…';
+ try{
+  let pair=srcLang+'|'+tgtLang;
+  let url='https://api.mymemory.translated.net/get?q='+encodeURIComponent(source.value.trim())+'&langpair='+pair;
+  let res=await fetch(url);if(!res.ok)throw Error('network');let data=await res.json();
+  let result=data?.responseData?.translatedText;
+  if(!result||data.responseStatus!==200)throw Error('translation');
+  target.value=decodeEntities(result);status.textContent='自動翻訳しました · 内容を確認してね';
+ }catch(e){status.textContent='自動翻訳できませんでした。手入力してください';}
+}
+function decodeEntities(s){let t=document.createElement('textarea');t.innerHTML=s;return t.value}
+function scheduleTranslate(){clearTimeout(translateTimer);document.getElementById('translateStatus').textContent='入力を待っています…';translateTimer=setTimeout(translate,650)}
+document.getElementById('translateNow').onclick=translate;
+document.getElementById('saveWord').onclick=()=>{
+ let d=find(document.getElementById('deckSelect').value);if(!d){toast('先に単語帳を作成してください');return}
+ let front=document.getElementById('frontInput').value.trim(),back=document.getElementById('backInput').value.trim();if(!front||!back){toast('表と裏の両方を入力してください');return}
+ if(editingId){let w=d.words.find(x=>x.id===editingId);if(w){w.front=front;w.back=back;w.frontLang=document.getElementById('frontLang').value;w.backLang=document.getElementById('backLang').value}}
+ else d.words.push({id:id(),front,back,frontLang:document.getElementById('frontLang').value,backLang:document.getElementById('backLang').value,known:null});
+ persist();clearEditor();renderWords();renderHome();toast('保存しました ♡')
+};
+function clearEditor(){editingId=null;document.getElementById('frontInput').value='';document.getElementById('backInput').value='';document.getElementById('translateStatus').textContent='入力すると自動翻訳します'}
+document.getElementById('clearWord').onclick=clearEditor;
+function renderWords(){
+ let d=find(document.getElementById('deckSelect').value),box=document.getElementById('wordList');if(!d){box.innerHTML='<div class="empty">単語帳を作成すると、ここに表示されます。</div>';return}
+ let w=allWords(d);box.innerHTML=w.length?w.map(x=>`<div class="cardrow"><div class="row between"><div class="word">${esc(x.front)}</div><span class="pill ${x.known===true?'ok':x.known===false?'ng':''}">${x.known===true?'○ 覚えた':x.known===false?'× 間違い':'未判定'}</span></div><div class="meaning">${esc(x.back)}</div><div class="row" style="justify-content:flex-end;margin-top:9px"><button class="btn small soft" data-wordedit="${x.id}">編集</button><button class="btn small gray" data-worddel="${x.id}">削除</button></div></div>`).join(''):'<div class="empty">まだ単語がありません ♡</div>';
+ box.querySelectorAll('[data-wordedit]').forEach(b=>b.onclick=()=>{let x=d.words.find(y=>y.id===b.dataset.wordedit);editingId=x.id;document.getElementById('frontInput').value=x.front;document.getElementById('backInput').value=x.back;document.getElementById('frontLang').value=x.frontLang||'en';document.getElementById('backLang').value=x.backLang||'ja';document.getElementById('translateStatus').textContent='編集中';window.scrollTo({top:0,behavior:'smooth'})});
+ box.querySelectorAll('[data-worddel]').forEach(b=>b.onclick=()=>{if(confirm('この単語を削除しますか？')){d.words=d.words.filter(x=>x.id!==b.dataset.worddel);persist();renderWords();renderHome()}});
+}
+function refreshQuizSelect(){let s=document.getElementById('quizDeckSelect'),old=s.value,ds=decks();s.innerHTML=ds.map(d=>`<option value="${d.id}">${esc(deckLabel(d))}</option>`).join('')||'<option value="">単語帳がありません</option>';if(ds.some(d=>d.id===old))s.value=old}
+document.getElementById('quizDeckSelect').onchange=startQuiz;
+function startQuiz(){let d=find(document.getElementById('quizDeckSelect').value);quizOrder=d?d.words.map(x=>x.id):[];quizIndex=0;flipped=false;renderQuiz()}
+function renderQuiz(){
+ let d=find(document.getElementById('quizDeckSelect').value),area=document.getElementById('quizArea');if(!d||!d.words.length){area.innerHTML='<div class="empty">単語帳と単語を登録するとテストできます ♡</div>';document.getElementById('quizProgress').textContent='0 / 0';return}
+ if(quizIndex>=quizOrder.length)quizIndex=0;
+ let w=d.words.find(x=>x.id===quizOrder[quizIndex]);if(!w){startQuiz();return}
+ document.getElementById('quizProgress').textContent=(quizIndex+1)+' / '+quizOrder.length;
+ document.getElementById('quizStatus').textContent=`習得率 ${mastery(d)}%`;
+ area.innerHTML=`<div class="flashcard" id="flipCard"><div class="side">${flipped?'BACK · ANSWER':'FRONT · QUESTION'}</div><div class="mainword">${esc(flipped?w.back:w.front)}</div><div class="tap">♡ ${flipped?'タップで表に戻る':'カードをタップして答えを見る'} ♡</div></div><div class="quiz-actions"><button class="wrong" id="markWrong">× まだ覚えてない</button><button class="right" id="markRight">○ 覚えた！</button></div><div class="row between" style="margin-top:12px"><button class="btn small gray" id="prevCard">← 前へ</button><button class="btn small soft" id="nextCard">次へ →</button></div><div class="notice">○をつけた単語の割合が習得率になります。×にすると未習得としてカウントされます。</div>`;
+ document.getElementById('flipCard').onclick=()=>{flipped=!flipped;renderQuiz()};
+ document.getElementById('markWrong').onclick=()=>mark(false);
+ document.getElementById('markRight').onclick=()=>mark(true);
+ document.getElementById('prevCard').onclick=()=>{quizIndex=(quizIndex-1+quizOrder.length)%quizOrder.length;flipped=false;renderQuiz()};
+ document.getElementById('nextCard').onclick=()=>{quizIndex=(quizIndex+1)%quizOrder.length;flipped=false;renderQuiz()};
+}
+function mark(known){let d=find(document.getElementById('quizDeckSelect').value),w=d?.words.find(x=>x.id===quizOrder[quizIndex]);if(!w)return;w.known=known;persist();quizIndex=(quizIndex+1)%quizOrder.length;flipped=false;renderQuiz();renderHome()}
+document.getElementById('exportBtn').onclick=()=>{let blob=new Blob([JSON.stringify(db,null,2)],{type:'application/json'}),a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='word-closet-backup.json';a.click();URL.revokeObjectURL(a.href)};
+document.getElementById('importBtn').onclick=()=>document.getElementById('importFile').click();
+document.getElementById('importFile').onchange=e=>{let f=e.target.files[0];if(!f)return;let r=new FileReader();r.onload=()=>{try{let x=JSON.parse(r.result);if(!Array.isArray(x.items))throw Error();if(confirm('現在のデータを読み込みデータで置き換えますか？')){db=x;persist();currentFolder=null;renderHome();refreshDeckSelect();toast('読み込みました')}}catch(_){toast('ファイルを読み込めませんでした')}};r.readAsText(f);e.target.value=''};
+renderHome();refreshDeckSelect();refreshQuizSelect();
+</script>
+</body>
+</html>
